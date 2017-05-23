@@ -1,0 +1,48 @@
+Date of LOG: 5/23/2017 5:34:29 PM
+-------------------------------------------------------
+SQL logic error or missing database
+near ")": syntax error
+-------------------------------------------------------
+
+Date of LOG: 5/23/2017 5:34:29 PM
+-------------------------------------------------------
+SQL logic error or missing database
+no such table: anothertest
+-------------------------------------------------------
+
+Date of LOG: 5/23/2017 5:34:42 PM
+-------------------------------------------------------
+SQL logic error or missing database
+near ")": syntax error
+-------------------------------------------------------
+
+Date of LOG: 5/23/2017 5:34:42 PM
+-------------------------------------------------------
+SQL logic error or missing database
+no such table: anothertest
+-------------------------------------------------------
+
+Date of LOG: 5/23/2017 5:36:16 PM
+-------------------------------------------------------
+SQL logic error or missing database
+near ")": syntax error
+-------------------------------------------------------
+
+Date of LOG: 5/23/2017 5:36:16 PM
+-------------------------------------------------------
+SQL logic error or missing database
+no such table: anothertest
+-------------------------------------------------------
+
+Date of LOG: 5/23/2017 5:36:33 PM
+-------------------------------------------------------
+SQL logic error or missing database
+no such table: anothertest
+-------------------------------------------------------
+
+Date of LOG: 5/23/2017 5:37:00 PM
+-------------------------------------------------------
+SQL logic error or missing database
+no such table: anothertest
+-------------------------------------------------------
+

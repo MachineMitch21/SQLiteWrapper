@@ -1,0 +1,10 @@
+c:\users\mitch\documents\visual studio 2015\Projects\SQLiteWrapper\WrapperTest\bin\Debug\WrapperTest.exe.config
+c:\users\mitch\documents\visual studio 2015\Projects\SQLiteWrapper\WrapperTest\bin\Debug\WrapperTest.exe
+c:\users\mitch\documents\visual studio 2015\Projects\SQLiteWrapper\WrapperTest\bin\Debug\WrapperTest.pdb
+c:\users\mitch\documents\visual studio 2015\Projects\SQLiteWrapper\WrapperTest\bin\Debug\SQLiteWrapper.dll
+c:\users\mitch\documents\visual studio 2015\Projects\SQLiteWrapper\WrapperTest\bin\Debug\System.Data.SQLite.dll
+c:\users\mitch\documents\visual studio 2015\Projects\SQLiteWrapper\WrapperTest\bin\Debug\SQLiteWrapper.pdb
+c:\users\mitch\documents\visual studio 2015\Projects\SQLiteWrapper\WrapperTest\bin\Debug\System.Data.SQLite.pdb
+c:\users\mitch\documents\visual studio 2015\Projects\SQLiteWrapper\WrapperTest\obj\Debug\WrapperTest.csprojResolveAssemblyReference.cache
+c:\users\mitch\documents\visual studio 2015\Projects\SQLiteWrapper\WrapperTest\obj\Debug\WrapperTest.exe
+c:\users\mitch\documents\visual studio 2015\Projects\SQLiteWrapper\WrapperTest\obj\Debug\WrapperTest.pdb

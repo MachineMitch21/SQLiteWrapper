@@ -1,0 +1,7 @@
+c:\users\mitch\documents\visual studio 2015\Projects\SQLiteWrapper\SQLiteWrapper\bin\Debug\SQLiteWrapper.dll
+c:\users\mitch\documents\visual studio 2015\Projects\SQLiteWrapper\SQLiteWrapper\bin\Debug\SQLiteWrapper.pdb
+c:\users\mitch\documents\visual studio 2015\Projects\SQLiteWrapper\SQLiteWrapper\bin\Debug\System.Data.SQLite.dll
+c:\users\mitch\documents\visual studio 2015\Projects\SQLiteWrapper\SQLiteWrapper\bin\Debug\System.Data.SQLite.pdb
+c:\users\mitch\documents\visual studio 2015\Projects\SQLiteWrapper\SQLiteWrapper\obj\Debug\SQLiteWrapper.csprojResolveAssemblyReference.cache
+c:\users\mitch\documents\visual studio 2015\Projects\SQLiteWrapper\SQLiteWrapper\obj\Debug\SQLiteWrapper.dll
+c:\users\mitch\documents\visual studio 2015\Projects\SQLiteWrapper\SQLiteWrapper\obj\Debug\SQLiteWrapper.pdb
