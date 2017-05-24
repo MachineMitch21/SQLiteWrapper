@@ -11,6 +11,8 @@ namespace SQLiteWrapper
     {
 
         private string log_path;
+
+        //This seperates log entries for more readability in the log file
         private string seperator = "-------------------------------------------------------";
 
         public ErrLogger(string logPath)
@@ -20,12 +22,22 @@ namespace SQLiteWrapper
 
         public void setLogPath(string path)
         {
-            log_path = path;
+            this.log_path = path;
         }
 
         public string getLogPath()
         {
-            return log_path;
+            return this.log_path;
+        }
+
+        public void setLogSeperator(string seperator)
+        {
+            this.seperator = seperator;
+        }
+
+        public string getLogSeperator()
+        {
+            return this.seperator;
         }
 
         public void writeErrReport(string err_report)
@@ -33,9 +45,10 @@ namespace SQLiteWrapper
             try
             {
                 StreamWriter writer = File.AppendText(log_path);
-                writer.WriteLine("Date of LOG: " + DateTime.Now.ToString() + Environment.NewLine 
-                                    + seperator + Environment.NewLine 
-                                    + err_report + Environment.NewLine + seperator + Environment.NewLine);
+                writer.WriteLine("Date of LOG: "    + DateTime.Now.ToString()   + Environment.NewLine 
+                                                    + seperator                 + Environment.NewLine 
+                                                    + err_report                + Environment.NewLine 
+                                                    + seperator                 + Environment.NewLine   );
                 writer.Close();
             }catch(IOException ioe)
             {

@@ -70,7 +70,7 @@ namespace SQLiteWrapper
         public SQL_STATUS CreateTable(string name, Dictionary<string, string> columns)
         {
             SQL_STATUS stat = SQL_STATUS.SQL_OKAY;
-            string sql = "CREATE TABLE IF NOT EXISTS " + name + " (";
+            string sql = String.Format("CREATE TABLE IF NOT EXISTS {0} (", name);
             
             //We need to retrieve the amount of elements withint the Dictionary so we can
             //know when the last element has been reached in our foreach loop
@@ -100,7 +100,7 @@ namespace SQLiteWrapper
                 cmd.ExecuteNonQuery();
             }catch(SQLiteException sql_e)
             {
-                logger.writeErrReport("ERROR WHILE CREATING TABLE *(" + name + ")*  ::" + sql_e.Message);
+                logger.writeErrReport(String.Format("ERROR WHILE CREATING TABLE *({0})*  ::{1}", name, sql_e.Message));
                 stat = SQL_STATUS.SQL_ERR;
             }
 
@@ -113,7 +113,7 @@ namespace SQLiteWrapper
         public SQL_STATUS DeleteTable(string name)
         {
             SQL_STATUS stat = SQL_STATUS.SQL_OKAY;
-            string sql = "DROP TABLE IF EXISTS " + name + ";";
+            string sql = String.Format("DROP TABLE IF EXISTS {0};", name);
             
             OpenConnection();
             SQLiteCommand cmd = new SQLiteCommand(sql, db_connection);
@@ -126,13 +126,37 @@ namespace SQLiteWrapper
                 logger.writeErrReport(sql_e.Message);
                 stat = SQL_STATUS.SQL_ERR;
             }
+            CloseConnection();
 
+            return stat;
+        }
+
+
+        public SQL_STATUS DeleteRecords(string table_name, string where_condition)
+        {
+            SQL_STATUS stat = SQL_STATUS.SQL_OKAY;
+            string sql = string.Format("DELETE FROM {0} WHERE {1};", table_name, where_condition);
+
+            SQLiteCommand cmd = new SQLiteCommand(db_connection);
+
+            OpenConnection();
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }catch(SQLiteException sql_e)
+            {
+                stat = SQL_STATUS.SQL_ERR;
+                logger.writeErrReport(sql_e.Message);
+            }
+
+            CloseConnection();
             return stat;
         }
 
         public DB_STATUS setWorkingDB(string db_name)
         {
-            DB_STATUS stat = DB_STATUS.DB_NOT_FOUND;
+            DB_STATUS stat;
 
             if (!dbExists(ref db_name))
             {
@@ -145,12 +169,12 @@ namespace SQLiteWrapper
             return stat;
         }
 
-        public void setErrLogFile(string file)
+        public void setErrLogFileName(string file)
         {
             logger.setLogPath(file);
         }
 
-        public string getErrLogFile()
+        public string getErrLogFileName()
         {
             return logger.getLogPath();
         }
@@ -172,7 +196,7 @@ namespace SQLiteWrapper
         {
             bool hasExt = false;
 
-            if(db_name.Substring(db_name.Length - 4) == ".db")
+            if(db_name.Substring(db_name.Length - 3) == ".db")
             {
                 hasExt = true;
             }
@@ -182,7 +206,7 @@ namespace SQLiteWrapper
 
         private void OpenConnection()
         {
-            db_connection = new SQLiteConnection("Data Source=" + working_db + ";Version=3");
+            db_connection = new SQLiteConnection(String.Format("Data Source={0};Version=3", working_db));
             db_connection.Open();
         }
         
