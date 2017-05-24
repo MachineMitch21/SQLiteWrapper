@@ -28,12 +28,6 @@ namespace SQLiteWrapper
 
     public class DB_Manager
     {
-
-        public DB_Manager()
-        {
-
-        }
-
         public DB_Manager(string working_db)
         {
             setWorkingDB(working_db);
@@ -74,13 +68,13 @@ namespace SQLiteWrapper
             
             //We need to retrieve the amount of elements withint the Dictionary so we can
             //know when the last element has been reached in our foreach loop
-            int columnsCount = columns.Count();
+            int columnCount = columns.Count();
             int i = 0;
 
             foreach(KeyValuePair<string, string> pair in columns)
             {
                 bool lastElement = false;
-                if (i == columnsCount - 1)
+                if (i == columnCount - 1)
                 {
                     lastElement = true;
                 }
@@ -135,9 +129,9 @@ namespace SQLiteWrapper
         public SQL_STATUS DeleteRecords(string table_name, string where_condition)
         {
             SQL_STATUS stat = SQL_STATUS.SQL_OKAY;
-            string sql = string.Format("DELETE FROM {0} WHERE {1};", table_name, where_condition);
+            string sql = String.Format("DELETE FROM {0} WHERE {1};", table_name, where_condition);
 
-            SQLiteCommand cmd = new SQLiteCommand(db_connection);
+            SQLiteCommand cmd = new SQLiteCommand(sql, db_connection);
 
             OpenConnection();
 
@@ -153,6 +147,78 @@ namespace SQLiteWrapper
             CloseConnection();
             return stat;
         }
+
+
+        public SQL_STATUS Alter(string table_name, string alter_type, string column)
+        {
+            SQL_STATUS stat = SQL_STATUS.SQL_OKAY;
+            string sql = String.Format("ALTER TABLE {0} {1} {2}", table_name, alter_type, column);
+
+            SQLiteCommand cmd = new SQLiteCommand(sql, db_connection);
+
+            OpenConnection();
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }catch(SQLiteException sql_e)
+            {
+                stat = SQL_STATUS.SQL_ERR;
+                logger.writeErrReport(sql_e.Message);
+            }
+
+            CloseConnection();
+
+            return stat;
+        }
+
+
+        public SQL_STATUS Update(string table_name, Dictionary<string, string> columns_values, string conditions)
+        {
+            SQL_STATUS stat = SQL_STATUS.SQL_OKAY;
+            string sql = String.Format("UPDATE {0} ", table_name);
+
+            int columnCount = columns_values.Count;
+
+            int i = 0;
+            foreach (KeyValuePair<string, string> pair in columns_values)
+            {
+                bool lastElement = false;
+                if (i == columnCount - 1)
+                {
+                    lastElement = true;
+                }
+                
+                sql += pair.Key.ToString() + " = " + pair.Value.ToString() + (lastElement ? String.Format(" {0};", conditions) : ", ");
+                i++;
+            }
+
+            SQLiteCommand cmd = new SQLiteCommand(sql, db_connection);
+
+            OpenConnection();
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }catch(SQLiteException sql_e)
+            {
+                stat = SQL_STATUS.SQL_ERR;
+                logger.writeErrReport(sql_e.Message);
+            }
+
+            CloseConnection();
+            return stat;
+        }
+
+
+        public SQL_STATUS Select(string table_name, string[] columns, string where)
+        {
+            SQL_STATUS stat = SQL_STATUS.SQL_OKAY;
+
+
+            return stat;
+        }
+
 
         public DB_STATUS setWorkingDB(string db_name)
         {
