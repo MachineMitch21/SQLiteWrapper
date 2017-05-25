@@ -43,6 +43,18 @@ namespace SQLiteWrapper
         SQLiteConnection db_connection;
 
 
+        public bool WriteLogsToFile
+        {
+            get
+            {
+                return logger.LogToFile;
+            }
+            set
+            {
+                logger.LogToFile = value;
+            }
+        }
+
         public DB_STATUS CreateDatabase(string db_name)
         {
             DB_STATUS stat = DB_STATUS.ERR_CREATING_DB;
@@ -148,7 +160,7 @@ namespace SQLiteWrapper
             return stat;
         }
 
-
+        //You will need to specify an alter type when calling this method since there are several different possibilities
         public SQL_STATUS Alter(string table_name, string alter_type, string column)
         {
             SQL_STATUS stat = SQL_STATUS.SQL_OKAY;
