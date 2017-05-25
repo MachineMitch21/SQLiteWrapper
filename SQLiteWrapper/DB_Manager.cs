@@ -129,7 +129,7 @@ namespace SQLiteWrapper
                 cmd.ExecuteNonQuery();
             }catch(SQLiteException sql_e)
             {
-                logger.writeErrReport(sql_e.Message);
+                logger.writeErrReport(String.Format("ERROR WHILE DELETING TABLE *({0})* ::{1}", name, sql_e.Message));
                 stat = SQL_STATUS.SQL_ERR;
             }
             CloseConnection();
@@ -153,7 +153,7 @@ namespace SQLiteWrapper
             }catch(SQLiteException sql_e)
             {
                 stat = SQL_STATUS.SQL_ERR;
-                logger.writeErrReport(sql_e.Message);
+                logger.writeErrReport(String.Format("ERROR WHILE DELETING RECORDS ON TABLE *({0})* ::{1}", table_name, sql_e.Message));
             }
 
             CloseConnection();
@@ -176,7 +176,7 @@ namespace SQLiteWrapper
             }catch(SQLiteException sql_e)
             {
                 stat = SQL_STATUS.SQL_ERR;
-                logger.writeErrReport(sql_e.Message);
+                logger.writeErrReport(String.Format("ERROR WHILE ALTERING ({0}) ON TABLE *({1})* ::{2}", column, table_name, sql_e.Message));
             }
 
             CloseConnection();
@@ -215,7 +215,7 @@ namespace SQLiteWrapper
             }catch(SQLiteException sql_e)
             {
                 stat = SQL_STATUS.SQL_ERR;
-                logger.writeErrReport(sql_e.Message);
+                logger.writeErrReport(String.Format("ERROR WHILE UPDATING TABLE *({0})* ::{1}", table_name, sql_e.Message));
             }
 
             CloseConnection();
@@ -249,7 +249,7 @@ namespace SQLiteWrapper
             }catch(SQLiteException sql_e)
             {
                 sql_data_reader = null;
-                logger.writeErrReport(sql_e.Message);
+                logger.writeErrReport(String.Format("ERROR WHILE RETRIEVING DATA FROM *({0})* ::{1}", table_name, sql_e.Message));
             }
 
             CloseConnection();
