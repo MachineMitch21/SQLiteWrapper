@@ -211,14 +211,48 @@ namespace SQLiteWrapper
         }
 
 
-        public SQL_STATUS Select(string table_name, string[] columns, string where)
+        public SQLiteDataReader Select(string table_name, string[] columns, string where)
         {
-            SQL_STATUS stat = SQL_STATUS.SQL_OKAY;
+            SQLiteDataReader sql_data_reader = null;
+            string sql = "SELECT ";
 
+            for (int i = 0; i < columns.Length; i++)
+            {
+                bool lastElement = false;
+                if(i == columns.Length - 1)
+                {
+                    lastElement = true;
+                }
 
-            return stat;
+                sql += String.Format("{0}{1}", columns[i], (lastElement ? String.Format(" FROM {0} WHERE {1}", table_name, where) : ", "));
+            }
+
+            SQLiteCommand cmd = new SQLiteCommand(sql, db_connection);
+
+            OpenConnection();
+
+            try
+            {
+                sql_data_reader = cmd.ExecuteReader();
+            }catch(SQLiteException sql_e)
+            {
+                sql_data_reader = null;
+                logger.writeErrReport(sql_e.Message);
+            }
+
+            CloseConnection();
+
+            return sql_data_reader;
         }
 
+
+        public SQLiteDataReader SelectJoin(string table_name, string[] columns, string join_table, string join_condition, string where)
+        {
+            //We have already written a select method so we don't need another one.
+            //We know that SQL joins follow the FROM {TABLE} statement so we just concatenate the table_name with our join data
+            //Then pass give that information to the select statement to retrieve the desired data
+            return Select(String.Format("{0} INNER JOIN {1} ON {2}", table_name, join_table, join_condition), columns, where);
+        }
 
         public DB_STATUS setWorkingDB(string db_name)
         {
